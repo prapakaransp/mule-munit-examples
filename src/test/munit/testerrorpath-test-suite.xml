@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd">
+	<munit:config name="testerrorpath-test-suite.xml" />
+	<munit:test name="testerrorpath-test-suite-testerrorpathFlowTest" description="Test" doc:id="4fa586a4-609c-43fc-831a-56e53ecf7240" >
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to testerrorpathFlow" doc:id="15dbf99e-17e3-4ea1-b3fe-797f9f177129" name="testerrorpathFlow"/>
+		</munit:execution>
+		<munit:validation >
+			<logger level="INFO" doc:name="Logger" doc:id="0a17337f-67f5-4827-9198-55541f904892" message="#[payload]"/>
+			<munit-tools:assert-that doc:name="Assert that" doc:id="939e9806-fa6a-459c-9831-61e97a47c62a" expression="#[payload]" is="#[MunitTools::equalTo('searchString not found')]"/>
+		</munit:validation>
+	</munit:test>
+
+</mule>

@@ -1,0 +1,17 @@
+{
+  "domain": "default",
+  "redeploymentEnabled": true,
+  "name": "testcustomassertion",
+  "minMuleVersion": "4.1.5",
+  "classLoaderModelLoaderDescriptor": {
+    "id": "mule",
+    "attributes": {
+      "exportedResources": [],
+      "exportedPackages": ["com.wml.test.customassertion"]
+    }
+  },
+  "bundleDescriptorLoader": {
+    "id": "mule"
+  
+  }
+}

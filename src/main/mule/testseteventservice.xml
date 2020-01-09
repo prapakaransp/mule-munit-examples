@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<flow name="testeventserviceFlow" doc:id="3eca7bb9-28dd-476d-91ae-0fcf0a0592ba" >
+		<http:listener doc:name="Listener" doc:id="21c4e300-bf1f-4a7d-bdf5-534a806ded44" path="/test" config-ref="HTTP_Listener_config"/>
+		<set-variable value="#[attributes.queryParams.searchString]" doc:name="Set Variable" doc:id="fa957864-7c20-43ea-8ef6-34a7ad5dd66d" variableName="searchString"/>
+		<choice doc:name="Choice" doc:id="340b7aa2-aaed-4fa7-9169-47605f04dc29" >
+			<when expression="#[vars.searchString == 'payload1']">
+				<logger level="INFO" doc:name="Logger" doc:id="6967bd1c-6dea-44e5-9a16-08ebfb0eaed9" message="Payload1 success"/>
+				<set-payload value="#['payload1']" doc:name="Set Payload" doc:id="1463906d-d951-4522-8857-f820890f44d7" />
+			</when>
+			<otherwise >
+				<logger level="INFO" doc:name="Logger" doc:id="e4216627-4bae-4a32-96b7-085d84fb3775" message="Other than payload2"/>
+				<set-payload value="#['payload2']" doc:name="Set Payload" doc:id="5ad7050d-d169-461e-a46a-30b4131c6e85" />
+			</otherwise>
+		</choice>
+	</flow>
+</mule>

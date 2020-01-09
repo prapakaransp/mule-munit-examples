@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<http:request-config name="HTTP_Request_configuration" doc:name="HTTP Request configuration" doc:id="361d69d3-2864-41f9-aafc-ba1145c60c16" >
+		<http:request-connection host="localhost" port="9090" />
+	</http:request-config>
+	<flow name="mockingconnectorFlow" doc:id="2a515ecf-77c5-47d1-8991-7c52b5089c78" >
+		<http:listener doc:name="Listener" doc:id="c268de45-c2be-400d-946f-a97e034345f6" path="/test" config-ref="HTTP_Listener_config"/>
+		<set-payload value="#[payload]" doc:name="Set Payload" doc:id="cdd2bf4d-0f7e-4a2a-bb02-b027b5a6163d" />
+		<http:request method="POST" doc:name="Request" doc:id="ee1c44c8-1196-4121-bc0e-bc4fe6f4c20c" path="/test" config-ref="HTTP_Request_configuration" outputMimeType="application/json"/>
+	</flow>
+</mule>

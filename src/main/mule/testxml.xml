@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd">
+	<flow name="testxmljsonFlow" doc:id="d8423c81-714f-4258-932f-fdc642e3141d" >
+		<scheduler doc:name="Scheduler" doc:id="f9575de3-e696-4769-a756-88a967003518" >
+			<scheduling-strategy >
+				<fixed-frequency />
+			</scheduling-strategy>
+		</scheduler>
+		<set-payload value="#[MunitTools::getResourceAsString('examples/Inventory_status_IFD.xml')]" doc:name="Set Payload" doc:id="b1809451-bf00-41d1-a71c-f6da41f8d3f5" />
+	</flow>
+</mule>

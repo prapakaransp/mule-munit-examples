@@ -1,0 +1,45 @@
+
+{
+  "inventory": {
+    "idempotentKey": "00000000000000015769",
+    "eventName": "",
+    "itemIdentifier": {
+      "value": "GTIN",
+      "itemNbr": "99887766"
+    },
+    "qunatity": {
+      "value": "0000000002",
+      "uom": "CS",
+      "vnpkWgtFormatCode": "",
+      "avgCaseWgtQty": ""
+    },
+    "nodes": {
+      "toNodes": {
+        "nodeCountry": "US"
+      }
+    },
+    "documents": {
+      "document": {
+        "toHostStatus": "HOST",
+        "fromStatus": "A",
+        "fromHostStatus": "WMS"
+      }
+    },
+    "eventFromCreationTs": {
+      "dateTime": {
+        "date": {
+          "year": 2019,
+          "month": 10,
+          "day": 17
+        },
+        "time": {
+          "hour": 22,
+          "minute": 17,
+          "second": 51,
+          "nano": 0
+        },
+        "eventFromTimeZone": "CDT"
+      }
+    }
+  }
+}

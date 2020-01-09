@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:assertobjectequals="http://www.mulesoft.org/schema/mule/assertobjectequals"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:munit="http://www.mulesoft.org/schema/mule/munit"
+	xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd
+http://www.mulesoft.org/schema/mule/assertobjectequals http://www.mulesoft.org/schema/mule/assertobjectequals/current/mule-assertobjectequals.xsd">
+	<munit:config name="testjson-test-suite.xml" />
+	<munit:test name="testjson-test-suite-testjsonFlowTest" description="Test" doc:id="fd01f134-7d83-4dbd-81f6-b01e823c77c8" >
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to testjsonFlow" doc:id="a86198cc-864e-40e8-899b-034ba7220bc2" name="testjsonFlow"/>
+		</munit:execution>
+
+			    <munit:validation >
+        <assertobjectequals:compare-objects
+            expected="#[MunitTools::getResourceAsString('examples/Inventory_status.json')]"
+            actual="#[payload]">
+            <assertobjectequals:path-options >
+                <assertobjectequals:path-option value="['addresses'][#]['timestamp'] ignore" /> <!-- Remove timestamp comparison -->
+            </assertobjectequals:path-options>
+        </assertobjectequals:compare-objects>
+ 
+
+		</munit:validation>
+	</munit:test>
+
+</mule>

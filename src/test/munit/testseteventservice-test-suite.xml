@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd">
+	<munit:config name="testeventservice-test-suite.xml" />
+	<munit:test name="testeventservice-test-suite-testeventserviceFlowTest" description="Test" doc:id="84bcfba9-05a2-4571-b6bf-f1ba34041e0d" >
+		<munit:execution >
+			<munit:set-event doc:name="Set Event" doc:id="26aff1fb-40eb-471a-b724-db88c5fdc208" >
+				<munit:attributes value="#[{'requestPath' : '/test', 'queryParams' : {'searchString' :'payload1'}}]" />
+			</munit:set-event>
+			<flow-ref doc:name="Flow-ref to testeventserviceFlow" doc:id="6aca532e-2d1d-4c64-ad59-af47b183358d" name="testeventserviceFlow"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-that doc:name="Assert that" doc:id="7ffba4f9-57f4-4fc0-a2c0-8010388f2441" expression="#[payload]" is="#[MunitTools::equalTo('payload1')]"/>
+		</munit:validation>
+	</munit:test>
+	
+	<munit:test name="testeventservice-test-suite-testeventserviceFlowTest2" description="Test" doc:id="4ee8dece-ec6e-40a3-a7e4-62748f404116" >
+		<munit:execution >
+			<munit:set-event doc:name="Set Event" doc:id="6012c5df-7750-4fb8-ae33-ceb207e7dbe9" >
+				<munit:attributes value="#[{'requestPath' : '/test', 'queryParams' : {'searchString' :'payload2'}}]" />
+			</munit:set-event>
+			<flow-ref doc:name="Flow-ref to testeventserviceFlow" doc:id="12182c97-024b-4f45-9207-88a41453d45e" name="testeventserviceFlow"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-that doc:name="Assert that" doc:id="3ec730f2-c15b-4597-8546-8b6a8148fa4a" expression="#[payload]" is="#[MunitTools::equalTo('payload2')]" message="Mock responsed is not matched"/>
+		</munit:validation>
+	</munit:test>
+
+</mule>

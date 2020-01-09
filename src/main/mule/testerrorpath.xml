@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<flow name="testerrorpathFlow" doc:id="f73a0693-1def-473f-a469-830d6299fe57" >
+		<http:listener doc:name="Listener" doc:id="11a6bb70-e45c-4ec9-9c00-8e15a9caac98" path="/test" config-ref="HTTP_Listener_config"/>
+		<try doc:name="Try" doc:id="b353f728-8570-44d0-839b-a1f9a560ec1f" >
+			<set-payload value="#['Seeting error message']" doc:name="Set Payload" doc:id="ddc6789b-3eb3-41b8-be78-e1cad5fd3fde" />
+			<raise-error doc:name="Raise error" doc:id="7c267ed5-1090-4cb4-921d-86dfc9d23149" type="MULE:EXPRESSION" description="Invalid input"/>
+			<error-handler >
+				<on-error-continue enableNotifications="true" logException="true" doc:name="On Error Continue" doc:id="e304b265-3301-4c00-8864-03d621d65eac" type="ANY">
+					<set-payload value="#['searchString not found']" doc:name="Set Payload" doc:id="2507d8ae-155e-49c3-a506-04ad7c1ba241" />
+				</on-error-continue>
+			</error-handler>
+		</try>
+		<logger level="INFO" doc:name="Logger" doc:id="b3645b6c-63aa-4ab3-956c-ffbec04f5bd5" message="#[payload]"/>
+	</flow>
+</mule>

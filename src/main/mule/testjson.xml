@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<flow name="testjsonFlow" doc:id="1e80a6ff-31fa-4954-ae34-1e1410dfd3f6" >
+		<scheduler doc:name="Scheduler" doc:id="3c4dc96d-12c0-4667-bb70-473469a552e4" >
+			<scheduling-strategy >
+				<fixed-frequency />
+			</scheduling-strategy>
+		</scheduler>
+		<ee:transform doc:name="Transform Message" doc:id="e11371b2-89ee-438f-88d9-246a4610f1e8" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+
+{
+  "inventory": {
+    "idempotentKey": "00000000000000015769",
+    "eventName": "",
+    "itemIdentifier": {
+      "value": "GTIN",
+      "itemNbr": "99887766"
+    },
+    "qunatity": {
+      "value": "0000000002",
+      "uom": "CS",
+      "vnpkWgtFormatCode": "",
+      "avgCaseWgtQty": ""
+    },
+    "nodes": {
+      "toNodes": {
+        "nodeCountry": "US"
+      }
+    },
+    "documents": {
+      "document": {
+        "toHostStatus": "HOST",
+        "fromStatus": "A",
+        "fromHostStatus": "WMS"
+      }
+    },
+    "eventFromCreationTs": {
+      "dateTime": {
+        "date": {
+          "year": 2019,
+          "month": 10,
+          "day": 17
+        },
+        "time": {
+          "hour": 22,
+          "minute": 17,
+          "second": 51,
+          "nano": 0
+        },
+        "eventFromTimeZone": "CDT"
+      }
+    }
+  }
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	</flow>
+</mule>

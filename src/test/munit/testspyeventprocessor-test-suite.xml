@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd">
+	<munit:config name="testspyservice-test-suite.xml" />
+	<munit:test name="testspyservice-test-suite-testspyserviceFlowTest" description="Test" doc:id="5ddaa87a-2602-47c1-bc47-2841ae6ed223" >
+		<munit:behavior >
+			<munit-tools:spy doc:name="Spy" doc:id="163fc1a9-7890-4a6f-aa4a-405de7d6c457" processor="ee:transform">
+				<munit-tools:before-call >
+					<munit-tools:assert-that doc:name="Assert that" doc:id="01c75d8e-1151-403d-ac84-66d13b0b2632" expression="#[payload]" is="#[MunitTools::equalTo('payload1')]"/>
+				</munit-tools:before-call>
+				<munit-tools:after-call >
+					<munit-tools:assert-that doc:name="Assert that" doc:id="19ca63b0-d53e-49a8-8c13-c472d7ec4745" expression="#[payload]" is="#[MunitTools::equalTo('payload1 dwl added')]"/>
+				</munit-tools:after-call>
+			</munit-tools:spy>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="testspyserviceFlow" doc:id="6a300cc1-b208-44fa-a87a-8cde1c237d9e" name="testspyserviceFlow"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-that doc:name="Assert that" doc:id="87f74f99-0010-4461-a39b-6da254f2d452" expression="#[payload]" is="#[MunitTools::notNullValue()]"/>
+		</munit:validation>
+	</munit:test>
+
+</mule>

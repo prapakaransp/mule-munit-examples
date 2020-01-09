@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd">
+	<munit:config name="testcustomassertion-test-suite.xml" />
+	<munit:test name="testcustomassertion-test-suite-testcustomassertionFlowTest" description="Test" doc:id="c7409457-0a1a-403f-9892-655aa9e1fab9" >
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to testcustomassertionFlow" doc:id="677e3ad8-01ea-4b88-a9d3-bf226e155eff" name="testcustomassertionFlow"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:run-custom
+                   assertion="com.wml.test.customassertion.HelloWorldAsser" 
+                   expression="#[payload]"/>
+		</munit:validation>
+	</munit:test>
+
+</mule>
